@@ -16,9 +16,11 @@ def as_json
   {
    id: id,
    first_name: first_name,
+   middle_name: middle_name,
    last_name: last_name,
    full_name: full_name,
    email: email,
+   bio: bio,
    phone_number: japan_number,
    updated_at: friendly_updated_at
   }
