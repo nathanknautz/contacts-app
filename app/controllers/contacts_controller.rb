@@ -12,8 +12,11 @@ class ContactsController < ApplicationController
                         middle_name: params[:middle_name],
                         bio: params[:bio]
                          )
-   contact.save
-   render json: contact.as_json
+  if contact.save
+    render json: contact.as_json
+  else
+    render json: {errors: contact.errors.full_messages}, status: :unprocessable_entity
+  end
  end
 
  def show
@@ -29,8 +32,11 @@ class ContactsController < ApplicationController
    contact.phone_number = params[:phone_number] || contact.phone_number
    contact.middle_name = params[:middle_name] || contact.middle_name
    contact.bio = params[:bio] || contact.bio
-   contact.save 
-   render json: contact.as_json
+  if contact.save
+    render json: contact.as_json
+  else
+    render json: {errors: contact.errors.full_messages}, status: :unprocessable_entity
+  end
  end
 
  def destroy
