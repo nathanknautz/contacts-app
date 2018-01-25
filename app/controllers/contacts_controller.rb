@@ -2,11 +2,19 @@ class ContactsController < ApplicationController
  def index
    contacts = Contact.all 
    search_term = params[:search]
+   sort_by = params[:sort]
    if search_term
     contacts = contacts.where("first_name iLIKE ? OR last_name iLIKE ? OR email iLike ? OR phone_number iLIKE ? OR middle_name iLIKE ? OR bio iLIKE ?",
+                              "%#{search_term}%",
+                              "%#{search_term}%",
+                              "%#{search_term}%",
+                              "%#{search_term}%",
+                              "%#{search_term}%",
                               "%#{search_term}%")
   end
-
+    if sort_by
+      contacts = contacts.order("#{sort_by}")
+    end
    render json: contacts.as_json
  end
 
